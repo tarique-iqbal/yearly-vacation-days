@@ -1,0 +1,34 @@
+{
+    "employees": {
+        "1": {
+            "name": "Hans Müller",
+            "dateOfBirth": "30.12.1970",
+            "contractStartDate": "01.07.2001",
+            "isSpecialContract": "no"
+        },
+        "2": {
+            "name": "Angelika Fringe",
+            "dateOfBirth": "09.06.1976",
+            "contractStartDate": "15.01.2001",
+            "isSpecialContract": "no"
+        },
+        "3": {
+            "name": "Peter Klever",
+            "dateOfBirth": "12.07.1991",
+            "contractStartDate": "15.05.2016",
+            "isSpecialContract": "yes"
+        },
+        "4": {
+            "name": "Marina Helter",
+            "dateOfBirth": "26.01.1970",
+            "contractStartDate": "15.01.2018",
+            "isSpecialContract": "no"
+        },
+        "5": {
+            "name": "Sepp Meier",
+            "dateOfBirth": "23.05.1980",
+            "contractStartDate": "01.12.2017",
+            "isSpecialContract": "no"
+        }
+    }
+}
