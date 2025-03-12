@@ -1,9 +1,49 @@
 package utils
 
 import (
+	"errors"
 	"math"
+	"os"
+	"sort"
+	"strconv"
 	"time"
 )
+
+func GetYearFromCLI() (int, error) {
+	if len(os.Args) < 2 {
+		return 0, errors.New("usage: go run cmd/main.go <year>")
+	}
+
+	year, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		return 0, errors.New("invalid year: please provide a numeric value")
+	}
+
+	return year, nil
+}
+
+func GetSortedEmployeeIDs(employeeMap map[string]any) []string {
+	if len(employeeMap) == 0 {
+		return []string{}
+	}
+
+	var ids []int
+
+	for id := range employeeMap {
+		if num, err := strconv.Atoi(id); err == nil {
+			ids = append(ids, num)
+		}
+	}
+
+	sort.Ints(ids)
+
+	var sortedIDs []string
+	for _, num := range ids {
+		sortedIDs = append(sortedIDs, strconv.Itoa(num))
+	}
+
+	return sortedIDs
+}
 
 func CalculateYearMonthDayDifference(pastTime time.Time, currentTime time.Time) (int, int, int, error) {
 	years := currentTime.Year() - pastTime.Year()

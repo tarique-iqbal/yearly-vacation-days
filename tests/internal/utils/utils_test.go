@@ -1,12 +1,63 @@
-package utils
+package utils_test
 
 import (
+	"os"
 	"testing"
 	"time"
 	"yearly-vacation-days/internal/utils"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestGetYearFromCLI_ValidInput(t *testing.T) {
+	os.Args = []string{"cmd/main.go", "2017"}
+
+	year, err := utils.GetYearFromCLI()
+
+	assert.Nil(t, err)
+	assert.Equal(t, 2017, year)
+}
+
+func TestGetYearFromCLI_MissingArgument(t *testing.T) {
+	os.Args = []string{"cmd/main.go"}
+
+	_, err := utils.GetYearFromCLI()
+
+	assert.NotNil(t, err)
+	assert.Equal(t, "usage: go run cmd/main.go <year>", err.Error())
+}
+
+func TestGetYearFromCLI_InvalidInput(t *testing.T) {
+	os.Args = []string{"cmd/main.go", "invalid"}
+
+	_, err := utils.GetYearFromCLI()
+
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid year: please provide a numeric value", err.Error())
+}
+
+func TestGetSortedEmployeeIDs(t *testing.T) {
+	input := map[string]any{
+		"2":  struct{}{},
+		"1":  struct{}{},
+		"10": struct{}{},
+		"5":  struct{}{},
+	}
+
+	expected := []string{"1", "2", "5", "10"}
+	sortedIDs := utils.GetSortedEmployeeIDs(input)
+
+	assert.Equal(t, expected, sortedIDs)
+}
+
+func TestGetSortedEmployeeIDs_EmptyMap(t *testing.T) {
+	input := map[string]any{}
+
+	expected := []string{}
+	sortedIDs := utils.GetSortedEmployeeIDs(input)
+
+	assert.Equal(t, expected, sortedIDs)
+}
 
 func TestCalculateYearMonthDayDifference(t *testing.T) {
 	testCases := []struct {
