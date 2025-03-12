@@ -1,5 +1,4 @@
 /bin/
-/cmd/
 *.exe
 *.out
 *.test
@@ -17,4 +16,4 @@ Thumbs.db
 *.tmp
 *.swp
 
-cover.out
+coverage.out
